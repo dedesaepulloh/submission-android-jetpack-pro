@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.dedesaepulloh.architecturecomponent.R
+import com.dedesaepulloh.architecturecomponent.data.model.MovieEntity
 import com.dedesaepulloh.architecturecomponent.databinding.ItemsMovieBinding
-import com.dedesaepulloh.architecturecomponent.model.MovieEntity
 import com.dedesaepulloh.architecturecomponent.utils.Helper
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {

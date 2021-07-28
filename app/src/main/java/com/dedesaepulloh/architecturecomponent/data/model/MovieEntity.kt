@@ -1,12 +1,10 @@
-@file:Suppress("DEPRECATED_ANNOTATION")
-
-package com.dedesaepulloh.architecturecomponent.model
+package com.dedesaepulloh.architecturecomponent.data.model
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class MovieEntity(
+class MovieEntity(
     val id: String? = null,
     val original_title: String? = null,
     val overview: String? = null,

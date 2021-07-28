@@ -1,10 +1,11 @@
 package com.dedesaepulloh.architecturecomponent.ui.home.movies
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.dedesaepulloh.architecturecomponent.model.MovieEntity
-import com.dedesaepulloh.architecturecomponent.utils.DataDummy
+import com.dedesaepulloh.architecturecomponent.data.model.MovieEntity
+import com.dedesaepulloh.architecturecomponent.data.source.CatalogRepository
 
-class MoviesViewModel : ViewModel() {
-    fun getMovies(): List<MovieEntity> =
-        DataDummy.generateDummyPopularMovies()
+class MoviesViewModel(private val catalogRepository: CatalogRepository) : ViewModel() {
+    fun getMovies(): LiveData<List<MovieEntity>> =
+        catalogRepository.getMoviePopular()
 }

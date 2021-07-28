@@ -35,7 +35,7 @@
             android:id="@+id/tv_vote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/gray_700"
+            android:background="#CC0c111b"
             android:elevation="10dp"
             android:gravity="center_vertical"
             android:padding="3dp"

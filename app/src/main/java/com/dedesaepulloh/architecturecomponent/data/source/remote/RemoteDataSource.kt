@@ -106,6 +106,28 @@ class RemoteDataSource private constructor() {
             })
     }
 
+    fun getTrendingMovie(callback: LoadTrendingCallback) {
+        EspressoIdlingResource.increment()
+        ApiConfig.getApiService().getMovieTrending()
+            .enqueue(object : retrofit2.Callback<ListResponse<MovieResponse>> {
+                override fun onResponse(
+                    call: Call<ListResponse<MovieResponse>>,
+                    response: Response<ListResponse<MovieResponse>>
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.results?.let { callback.onAllTrendingReceived(it) }
+                    }
+                    EspressoIdlingResource.decrement()
+                }
+
+                override fun onFailure(call: Call<ListResponse<MovieResponse>>, t: Throwable) {
+                    Log.e("Failure", "${t.message}")
+                    callback.onAllTrendingReceived(emptyList())
+                    EspressoIdlingResource.decrement()
+                }
+            })
+    }
+
     interface LoadMoviePopularCallback {
         fun onAllMovieReceived(movieResponse: List<MovieResponse?>)
     }
@@ -120,6 +142,10 @@ class RemoteDataSource private constructor() {
 
     interface LoadDetailTvShowCallback {
         fun onDetailTvShowReceived(tvShowResponse: TvShowResponse)
+    }
+
+    interface LoadTrendingCallback {
+        fun onAllTrendingReceived(movieResponse: List<MovieResponse?>)
     }
 
 }

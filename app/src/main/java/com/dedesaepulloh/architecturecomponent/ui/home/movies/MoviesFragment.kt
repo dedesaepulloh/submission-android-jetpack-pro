@@ -18,15 +18,14 @@ import com.dedesaepulloh.architecturecomponent.viewmodel.ViewModelFactory
 class MoviesFragment : Fragment() {
 
     private lateinit var moviesViewModel: MoviesViewModel
-    private var fragmentMoviesBinding: FragmentMoviesBinding? = null
-    private val binding get() = fragmentMoviesBinding as FragmentMoviesBinding
+    private lateinit var binding: FragmentMoviesBinding
     private lateinit var adapter: MovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        fragmentMoviesBinding = FragmentMoviesBinding.inflate(inflater, container, false)
+        binding = FragmentMoviesBinding.inflate(inflater, container, false)
         return binding.root
     }
 

@@ -31,6 +31,8 @@ class CatalogRepositoryTest {
     private val tvShowId = listTvShow[0].id.toString()
     private val tvShowResponse = DataDummy.generateDummyTvShowResponse()[0]
 
+    private val listTrending = DataDummy.generateDummyMovieResponse()
+
     @Test
     fun getMoviePopular() {
         runBlocking {
@@ -109,5 +111,24 @@ class CatalogRepositoryTest {
 
         assertNotNull(detail)
         assertEquals(tvShowResponse.id.toString(), detail.id)
+    }
+
+    @Test
+    fun getTrending() {
+        runBlocking {
+            doAnswer { invocation ->
+                (invocation.arguments[0] as RemoteDataSource.LoadTrendingCallback).onAllTrendingReceived(
+                    listTrending
+                )
+                null
+            }.`when`(remote).getTrendingMovie(any())
+
+            val trending = LiveDataTestUtil.getValue(catalogRepository.getTrending())
+            runBlocking {
+                verify(remote).getTrendingMovie(any())
+            }
+            assertNotNull(trending)
+            assertEquals(listTrending.size, trending.size)
+        }
     }
 }

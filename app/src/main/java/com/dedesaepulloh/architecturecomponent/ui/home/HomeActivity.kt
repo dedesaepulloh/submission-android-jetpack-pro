@@ -21,7 +21,8 @@ class HomeActivity : AppCompatActivity() {
 
         val bottomNavigationView: BottomNavigationView = activityHomeBinding.bottomNav
         val navController = findNavController(R.id.nav_fragment)
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.movie_nav, R.id.tvshow_nav))
+        val appBarConfiguration =
+            AppBarConfiguration(setOf(R.id.trending_nav, R.id.movie_nav, R.id.tvshow_nav))
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavigationView.setupWithNavController(navController)

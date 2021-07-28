@@ -6,6 +6,7 @@ import com.dedesaepulloh.architecturecomponent.data.source.CatalogRepository
 import com.dedesaepulloh.architecturecomponent.di.Injection
 import com.dedesaepulloh.architecturecomponent.ui.detail.DetailViewModel
 import com.dedesaepulloh.architecturecomponent.ui.home.movies.MoviesViewModel
+import com.dedesaepulloh.architecturecomponent.ui.home.trending.TrendingViewModel
 import com.dedesaepulloh.architecturecomponent.ui.home.tvshow.TvShowViewModel
 
 class ViewModelFactory private constructor(private val mCatalogRepository: CatalogRepository) :
@@ -33,6 +34,9 @@ class ViewModelFactory private constructor(private val mCatalogRepository: Catal
             }
             modelClass.isAssignableFrom(TvShowViewModel::class.java) -> {
                 TvShowViewModel(mCatalogRepository) as T
+            }
+            modelClass.isAssignableFrom(TrendingViewModel::class.java) -> {
+                TrendingViewModel(mCatalogRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

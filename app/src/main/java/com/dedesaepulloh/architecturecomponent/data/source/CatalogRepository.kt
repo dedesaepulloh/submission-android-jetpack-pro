@@ -133,4 +133,35 @@ class CatalogRepository private constructor(private val remoteDataSource: Remote
         }
         return tvShowResult
     }
+
+    override fun getTrending(): LiveData<List<MovieEntity>> {
+        val movieResult = MutableLiveData<List<MovieEntity>>()
+        CoroutineScope(IO).launch {
+            remoteDataSource.getTrendingMovie(object : RemoteDataSource.LoadTrendingCallback {
+                override fun onAllTrendingReceived(movieResponse: List<MovieResponse?>) {
+                    val movieList = ArrayList<MovieEntity>()
+                    if (movieResponse.isNotEmpty()) {
+                        for (response in movieResponse) {
+                            if (response !== null) {
+                                val movie = MovieEntity(
+                                    response.id.toString(),
+                                    response.original_title,
+                                    response.overview,
+                                    response.popularity,
+                                    response.poster_path,
+                                    response.release_date,
+                                    response.vote_average
+                                )
+                                movieList.add(movie)
+                            }
+                        }
+                        movieResult.postValue(movieList)
+                    } else {
+                        movieResult.postValue(movieList)
+                    }
+                }
+            })
+        }
+        return movieResult
+    }
 }

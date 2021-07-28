@@ -32,5 +32,10 @@ interface ApiService {
         @Query("api_key") apiKey: String = BuildConfig.API_KEY
     ): Call<TvShowResponse>
 
+    @GET("trending/movie/day?")
+    fun getMovieTrending(
+        @Query("api_key") apiKey: String = BuildConfig.API_KEY
+    ): Call<ListResponse<MovieResponse>>
+
 
 }

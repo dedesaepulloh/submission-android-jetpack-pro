@@ -560,4 +560,143 @@ object DataDummy {
 
         return tvshow
     }
+
+    fun generateDummyTrending(): List<MovieEntity> {
+        val trending = ArrayList<MovieEntity>()
+
+        trending.add(
+            MovieEntity(
+                "617502",
+                "Jolt",
+                "Lindy is an acid-tongued woman with rage issues who controls her temper by shocking herself with an electrode vest. One day she makes a connection with Justin, who gives her a glimmer of hope for a shock-free future, but when he’s murdered she launches herself on a revenge-fueled rampage in pursuit of his killer.",
+                147.71,
+                "gYZAHan5CHPFXORpQMvOjCTug4E.jpg",
+                "2021-07-29",
+                6.7
+            )
+        )
+        trending.add(
+            MovieEntity(
+                "760883",
+                "Blood Red Sky",
+                "A woman with a mysterious illness is forced into action when a group of terrorists attempt to hijack a transatlantic overnight flight. In order to protect her son she will have to reveal a dark secret, and unleash the inner monster she has fought to hide.",
+                265.454,
+                "ky8Fua6PD7FyyOA7JACh3GDETli.jpg",
+                "2021-07-23",
+                7.6,
+            )
+        )
+        trending.add(
+            MovieEntity(
+                "736074",
+                "Batman: The Long Halloween, Part Two",
+                "As Gotham City's young vigilante, the Batman, struggles to pursue a brutal serial killer, district attorney Harvey Dent gets caught in a feud involving the criminal family of the Falcones.",
+                87.406,
+                "5X1n5q08mZ7NpNpxehMFODxfNYq.jpg",
+                "2021-07-26",
+                7.0,
+            )
+        )
+        trending.add(
+            MovieEntity(
+                "845222",
+                "킹덤: 아신전",
+                "Tragedy, betrayal and a mysterious discovery fuel a woman's vengeance for the loss of her tribe and family in this special episode of \"Kingdom.\"",
+                159.386,
+                "piGZDwFW4urLYDWGiYJMrt6hdCS.jpg",
+                "2021-07-23",
+                8.0,
+            )
+        )
+        trending.add(
+            MovieEntity(
+                "497698",
+                "Black Widow",
+                "Natasha Romanoff, also known as Black Widow, confronts the darker parts of her ledger when a dangerous conspiracy with ties to her past arises. Pursued by a force that will stop at nothing to bring her down, Natasha must deal with her history as a spy and the broken relationships left in her wake long before she became an Avenger.",
+                4719.094,
+                "qAZ0pzat24kLdO3o8ejmbLxyOac.jpg",
+                "2021-07-07",
+                8.0,
+            )
+        )
+        trending.add(
+            MovieEntity(
+                "379686",
+                "Space Jam: A New Legacy",
+                "When LeBron and his young son Dom are trapped in a digital space by a rogue A.I., LeBron must get them home safe by leading Bugs, Lola Bunny and the whole gang of notoriously undisciplined Looney Tunes to victory over the A.I.'s digitized champions on the court. It's Tunes versus Goons in the highest-stakes challenge of his life.",
+                5712.919,
+                "5bFK5d3mVTAvBCXi5NPWH0tYjKl.jpg",
+                "2021-07-08",
+                7.8
+            )
+        )
+        trending.add(
+            MovieEntity(
+                "520763",
+                "A Quiet Place Part II",
+                "Following the events at home, the Abbott family now face the terrors of the outside world. Forced to venture into the unknown, they realize that the creatures that hunt by sound are not the only threats that lurk beyond the sand path.",
+                1215.898,
+                "4q2hz2m8hubgvijz8Ez0T2Os2Yv.jpg",
+                "2021-05-21",
+                7.7,
+            )
+        )
+        trending.add(
+            MovieEntity(
+                "602223",
+                "The Forever Purge",
+                "All the rules are broken as a sect of lawless marauders decides that the annual Purge does not stop at daybreak and instead should never end as they chase a group of immigrants who they want to punish because of their harsh historical past.",
+                4309.826,
+                "uHA5COgDzcxjpYSHHulrKVl6ByL.jpg",
+                "2021-06-30",
+                7.8,
+            )
+        )
+        trending.add(
+            MovieEntity(
+                "522931",
+                "Hitman's Wife's Bodyguard",
+                "The world’s most lethal odd couple – bodyguard Michael Bryce and hitman Darius Kincaid – are back on another life-threatening mission. Still unlicensed and under scrutiny, Bryce is forced into action by Darius's even more volatile wife, the infamous international con artist Sonia Kincaid. As Bryce is driven over the edge by his two most dangerous protectees, the trio get in over their heads in a global plot and soon find that they are all that stand between Europe and a vengeful and powerful madman.",
+                273.869,
+                "6zwGWDpY8Zu0L6W4SYWERBR8Msw.jpg",
+                "2021-06-14",
+                7.0,
+            )
+        )
+        trending.add(
+            MovieEntity(
+                "730840",
+                "Trollhunters: Rise of the Titans",
+                "Arcadia may look like an ordinary town, but it lies at the center of magical and mystical lines that makes it a nexus for many battles among otherworldly creatures, including trolls, aliens, and wizards. Now, various heroes will team-up in an epic adventure where they must fight the Arcane Order for control over the magic that binds them all together.",
+                923.952,
+                "zvUNFeTz0Sssb210wSiIiHRjA4W.jpg",
+                "2021-07-21",
+                8.0
+            )
+        )
+        trending.add(
+            MovieEntity(
+                "385128",
+                "F9",
+                "Dominic Toretto and his crew battle the most skilled assassin and high-performance driver they've ever encountered: his forsaken brother.",
+                1613.337,
+                "bOFaAXmWWXC3Rbv4u4uM9ZSzRXP.jpg",
+                "2021-05-19",
+                7.5
+            )
+        )
+        trending.add(
+            MovieEntity(
+                "638449",
+                "The Last Letter From Your Lover",
+                "A young journalist in London becomes obsessed with a series of letters she discovers that recounts an intense star-crossed love affair from the 1960s.",
+                70.61,
+                "fDKK51YdOfu9pTmSRw7sHUhGFxm.jpg",
+                "2021-07-30",
+                7.6
+            )
+        )
+
+        return trending
+    }
 }

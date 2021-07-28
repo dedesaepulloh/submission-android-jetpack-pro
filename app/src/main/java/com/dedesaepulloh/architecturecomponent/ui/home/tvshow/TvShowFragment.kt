@@ -18,8 +18,7 @@ import com.dedesaepulloh.architecturecomponent.viewmodel.ViewModelFactory
 class TvShowFragment : Fragment() {
 
     private lateinit var tvShowViewModel: TvShowViewModel
-    private var fragmentTvShowBinding: FragmentTvShowBinding? = null
-    private val binding get() = fragmentTvShowBinding as FragmentTvShowBinding
+    private lateinit var binding : FragmentTvShowBinding
     private lateinit var adapter: MovieAdapter
 
     override fun onCreateView(
@@ -27,7 +26,7 @@ class TvShowFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        fragmentTvShowBinding = FragmentTvShowBinding.inflate(inflater, container, false)
+        binding = FragmentTvShowBinding.inflate(inflater, container, false)
         return binding.root
     }
 

@@ -2,7 +2,13 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@+id/movie_nav">
+    app:startDestination="@id/trending_nav">
+
+    <fragment
+        android:id="@+id/trending_nav"
+        android:name="com.dedesaepulloh.architecturecomponent.ui.home.trending.TrendingFragment"
+        android:label="@string/trending"
+        tools:layout="@layout/fragment_trending" />
 
     <fragment
         android:id="@+id/movie_nav"

@@ -34,6 +34,7 @@ class HomeActivityTest {
 
     @Test
     fun loadMovie() {
+        onView(withId(R.id.movie_nav)).perform(click())
         onView(withId(R.id.rv_movie)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_movie)).perform(
             RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
@@ -100,6 +101,17 @@ class HomeActivityTest {
 
         pressBack()
 
+    }
+
+    @Test
+    fun loadTrending() {
+        onView(withId(R.id.trending_nav)).perform(click())
+        onView(withId(R.id.rv_trending)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_trending)).perform(
+            RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
+                6
+            )
+        )
     }
 
 }

@@ -26,9 +26,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="fill"
+            android:contentDescription="@string/movies"
             android:foregroundGravity="fill"
             android:scaleType="fitXY"
-            tools:ignore="ContentDescription"
             tools:srcCompat="@drawable/ic_image" />
 
         <TextView

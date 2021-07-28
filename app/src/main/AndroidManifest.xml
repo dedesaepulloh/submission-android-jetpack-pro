@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.dedesaepulloh.architecturecomponent">
+    package="com.dedesaepulloh.submissionbajp">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,10 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ArchitectureComponent"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.home.HomeActivity" />
-        <activity android:name=".ui.detail.DetailActivity" />
+        <activity android:name="com.dedesaepulloh.submissionbajp.ui.home.HomeActivity" />
+        <activity android:name="com.dedesaepulloh.submissionbajp.ui.detail.DetailActivity" />
         <activity
-            android:name=".ui.SplashScreenActivity"
+            android:name="com.dedesaepulloh.submissionbajp.ui.SplashScreenActivity"
             android:theme="@style/Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

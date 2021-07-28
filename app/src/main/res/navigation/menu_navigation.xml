@@ -6,19 +6,19 @@
 
     <fragment
         android:id="@+id/trending_nav"
-        android:name="com.dedesaepulloh.architecturecomponent.ui.home.trending.TrendingFragment"
+        android:name="com.dedesaepulloh.submissionbajp.ui.home.trending.TrendingFragment"
         android:label="@string/trending"
         tools:layout="@layout/fragment_trending" />
 
     <fragment
         android:id="@+id/movie_nav"
-        android:name="com.dedesaepulloh.architecturecomponent.ui.home.movies.MoviesFragment"
+        android:name="com.dedesaepulloh.submissionbajp.ui.home.movies.MoviesFragment"
         android:label="@string/movies"
         tools:layout="@layout/fragment_movies" />
 
     <fragment
         android:id="@+id/tvshow_nav"
-        android:name="com.dedesaepulloh.architecturecomponent.ui.home.tvshow.TvShowFragment"
+        android:name="com.dedesaepulloh.submissionbajp.ui.home.tvshow.TvShowFragment"
         android:label="@string/tv_show"
         tools:layout="@layout/fragment_tv_show" />
 

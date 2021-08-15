@@ -3,7 +3,7 @@ package com.dedesaepulloh.submissionbajp.ui.home.trending
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.dedesaepulloh.submissionbajp.data.model.MovieEntity
+import com.dedesaepulloh.submissionbajp.data.source.local.entity.MovieEntity
 import com.dedesaepulloh.submissionbajp.data.source.CatalogRepository
 import com.dedesaepulloh.submissionbajp.utils.DataDummy
 import org.junit.Assert.assertEquals

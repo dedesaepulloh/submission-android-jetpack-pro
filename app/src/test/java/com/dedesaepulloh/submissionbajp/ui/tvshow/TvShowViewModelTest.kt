@@ -1,9 +1,9 @@
-package com.dedesaepulloh.submissionbajp.ui.home.movies
+package com.dedesaepulloh.submissionbajp.ui.home.tvshow
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.dedesaepulloh.submissionbajp.data.model.MovieEntity
+import com.dedesaepulloh.submissionbajp.data.source.local.entity.MovieEntity
 import com.dedesaepulloh.submissionbajp.data.source.CatalogRepository
 import com.dedesaepulloh.submissionbajp.utils.DataDummy
 import org.junit.Assert.assertEquals
@@ -18,9 +18,9 @@ import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class MoviesViewModelTest {
+class TvShowViewModelTest {
 
-    private lateinit var viewModel: MoviesViewModel
+    private lateinit var viewModel: TvShowViewModel
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -33,23 +33,23 @@ class MoviesViewModelTest {
 
     @Before
     fun setUp() {
-        viewModel = MoviesViewModel(catalogRepository)
+        viewModel = TvShowViewModel(catalogRepository)
     }
 
     @Test
-    fun getMovies() {
-        val dummyMovie = DataDummy.generateDummyPopularMovies()
-        val movie = MutableLiveData<List<MovieEntity>>()
-        movie.value = dummyMovie
+    fun getTvShow() {
+        val dummyTvShow = DataDummy.generateDummyTvShow()
+        val tvShow = MutableLiveData<List<MovieEntity>>()
+        tvShow.value = dummyTvShow
 
-        `when`(catalogRepository.getMoviePopular()).thenReturn(movie)
+        `when`(catalogRepository.getTvShowPopular()).thenReturn(tvShow)
 
-        val movieEntities = viewModel.getMovies().value
-        verify(catalogRepository).getMoviePopular()
-        assertNotNull(movieEntities)
-        assertEquals(12, movieEntities?.size)
+        val tvShowEntities = viewModel.getTvShow().value
+        verify(catalogRepository).getTvShowPopular()
+        assertNotNull(tvShowEntities)
+        assertEquals(12, tvShowEntities?.size)
 
-        viewModel.getMovies().observeForever(observer)
-        verify(observer).onChanged(dummyMovie)
+        viewModel.getTvShow().observeForever(observer)
+        verify(observer).onChanged(dummyTvShow)
     }
 }

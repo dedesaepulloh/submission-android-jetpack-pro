@@ -1,32 +1,43 @@
 package com.dedesaepulloh.submissionbajp.ui.home.movies
 
-import android.content.Intent
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.dedesaepulloh.submissionbajp.data.model.MovieEntity
+import com.dedesaepulloh.submissionbajp.BaseApplication
 import com.dedesaepulloh.submissionbajp.databinding.FragmentMoviesBinding
 import com.dedesaepulloh.submissionbajp.ui.adapter.MovieAdapter
-import com.dedesaepulloh.submissionbajp.ui.detail.DetailActivity
-import com.dedesaepulloh.submissionbajp.utils.Helper
 import com.dedesaepulloh.submissionbajp.viewmodel.ViewModelFactory
+import com.dedesaepulloh.submissionbajp.vo.Status
+import javax.inject.Inject
 
 class MoviesFragment : Fragment() {
 
-    private lateinit var moviesViewModel: MoviesViewModel
-    private lateinit var binding: FragmentMoviesBinding
+    private var fragmentMoviesBinding: FragmentMoviesBinding? = null
+    private val binding get() = fragmentMoviesBinding as FragmentMoviesBinding
     private lateinit var adapter: MovieAdapter
+
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val movieViewModel: MoviesViewModel by viewModels { factory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMoviesBinding.inflate(inflater, container, false)
+        fragmentMoviesBinding = FragmentMoviesBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as BaseApplication).appComponent.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,28 +50,24 @@ class MoviesFragment : Fragment() {
             rvMovie.adapter = adapter
         }
 
-        val factory = ViewModelFactory.getInstance()
-        moviesViewModel =
-            ViewModelProvider(this, factory).get(MoviesViewModel::class.java)
-
-        moviesViewModel.getMovies().observe(viewLifecycleOwner, {
-            adapter.setList(it)
-            adapter.notifyDataSetChanged()
-            showLoading(false)
-        })
-
-        adapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: MovieEntity) {
-                showDetail(data)
+        movieViewModel.getMovies().observe(viewLifecycleOwner, { movie ->
+            if (movie != null) {
+                when (movie.status) {
+                    Status.LOADING -> showLoading(true)
+                    Status.SUCCESS -> {
+                        movie.data?.let {
+                            adapter.submitList(it)
+                            adapter.notifyDataSetChanged()
+                            Log.i("DATA : ", it.toString())
+                            showLoading(false)
+                        }
+                    }
+                    Status.ERROR -> {
+                        showLoading(false)
+                    }
+                }
             }
         })
-
-    }
-
-    private fun showDetail(data: MovieEntity) {
-        val detail = Intent(context, DetailActivity::class.java)
-        detail.putExtra(Helper.EXTRA_ID, data.id).putExtra(Helper.EXTRA_KEY, Helper.EXTRA_MOVIE)
-        startActivity(detail)
     }
 
     private fun showLoading(state: Boolean) {

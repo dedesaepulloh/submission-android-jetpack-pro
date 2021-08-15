@@ -3,25 +3,17 @@ package com.dedesaepulloh.submissionbajp.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dedesaepulloh.submissionbajp.data.source.CatalogRepository
-import com.dedesaepulloh.submissionbajp.di.Injection
+import com.dedesaepulloh.submissionbajp.di.AppScope
 import com.dedesaepulloh.submissionbajp.ui.detail.DetailViewModel
-import com.dedesaepulloh.submissionbajp.ui.home.movies.MoviesViewModel
-import com.dedesaepulloh.submissionbajp.ui.home.trending.TrendingViewModel
-import com.dedesaepulloh.submissionbajp.ui.home.tvshow.TvShowViewModel
+import com.dedesaepulloh.submissionbajp.ui.favorite.FavoriteViewModel
+import com.dedesaepulloh.submissionbajp.ui.movies.MoviesViewModel
+import com.dedesaepulloh.submissionbajp.ui.trending.TrendingViewModel
+import com.dedesaepulloh.submissionbajp.ui.tvshow.TvShowViewModel
+import javax.inject.Inject
 
-class ViewModelFactory private constructor(private val mCatalogRepository: CatalogRepository) :
+@AppScope
+class ViewModelFactory @Inject constructor(private val mCatalogRepository: CatalogRepository) :
     ViewModelProvider.NewInstanceFactory() {
-    companion object {
-        @Volatile
-        private var instance: ViewModelFactory? = null
-
-        fun getInstance(): ViewModelFactory =
-            instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(Injection.provideCatalogRepository()).apply {
-                    instance = this
-                }
-            }
-    }
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
@@ -38,8 +30,10 @@ class ViewModelFactory private constructor(private val mCatalogRepository: Catal
             modelClass.isAssignableFrom(TrendingViewModel::class.java) -> {
                 TrendingViewModel(mCatalogRepository) as T
             }
+            modelClass.isAssignableFrom(FavoriteViewModel::class.java) -> {
+                FavoriteViewModel(mCatalogRepository) as T
+            }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }
     }
-
 }

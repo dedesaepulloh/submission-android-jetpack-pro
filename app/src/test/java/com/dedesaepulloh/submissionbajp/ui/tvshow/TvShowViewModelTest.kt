@@ -1,11 +1,12 @@
-package com.dedesaepulloh.submissionbajp.ui.home.tvshow
+package com.dedesaepulloh.submissionbajp.ui.tvshow
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.dedesaepulloh.submissionbajp.data.source.local.entity.MovieEntity
+import androidx.paging.PagedList
 import com.dedesaepulloh.submissionbajp.data.source.CatalogRepository
-import com.dedesaepulloh.submissionbajp.utils.DataDummy
+import com.dedesaepulloh.submissionbajp.data.source.local.entity.TvShowEntity
+import com.dedesaepulloh.submissionbajp.vo.Resource
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
@@ -29,7 +30,10 @@ class TvShowViewModelTest {
     private lateinit var catalogRepository: CatalogRepository
 
     @Mock
-    private lateinit var observer: Observer<List<MovieEntity>>
+    private lateinit var observer: Observer<Resource<PagedList<TvShowEntity>>>
+
+    @Mock
+    private lateinit var tvShowPagedList: PagedList<TvShowEntity>
 
     @Before
     fun setUp() {
@@ -38,13 +42,14 @@ class TvShowViewModelTest {
 
     @Test
     fun getTvShow() {
-        val dummyTvShow = DataDummy.generateDummyTvShow()
-        val tvShow = MutableLiveData<List<MovieEntity>>()
+        val dummyTvShow = Resource.success(tvShowPagedList)
+        val tvShow = MutableLiveData<Resource<PagedList<TvShowEntity>>>()
         tvShow.value = dummyTvShow
 
+        `when`(dummyTvShow.data?.size).thenReturn(12)
         `when`(catalogRepository.getTvShowPopular()).thenReturn(tvShow)
 
-        val tvShowEntities = viewModel.getTvShow().value
+        val tvShowEntities = viewModel.getTvShow().value?.data
         verify(catalogRepository).getTvShowPopular()
         assertNotNull(tvShowEntities)
         assertEquals(12, tvShowEntities?.size)

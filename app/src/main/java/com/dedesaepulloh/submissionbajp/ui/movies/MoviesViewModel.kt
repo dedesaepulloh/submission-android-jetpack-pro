@@ -1,4 +1,4 @@
-package com.dedesaepulloh.submissionbajp.ui.home.movies
+package com.dedesaepulloh.submissionbajp.ui.movies
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

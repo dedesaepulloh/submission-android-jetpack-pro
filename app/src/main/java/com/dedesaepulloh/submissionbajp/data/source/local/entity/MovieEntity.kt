@@ -1,4 +1,4 @@
-package com.dedesaepulloh.submissionbajp.data.model
+package com.dedesaepulloh.submissionbajp.data.source.local.entity
 
 import android.os.Parcelable
 import androidx.annotation.NonNull
@@ -14,7 +14,7 @@ data class MovieEntity(
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "movieId")
-    val movieId: Int? = null,
+    val movieId: Int,
 
     @ColumnInfo(name = "original_title")
     val original_title: String? = null,
@@ -35,6 +35,6 @@ data class MovieEntity(
     val vote_average: Double? = null,
 
     @ColumnInfo(name = "favorite")
-    val favorite: Boolean = false
+    var favorite: Boolean = false
 
 ) : Parcelable

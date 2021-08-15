@@ -1,6 +1,5 @@
-package com.dedesaepulloh.submissionbajp.ui.adapter
+package com.dedesaepulloh.submissionbajp.ui.trending.adapter
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -33,7 +32,6 @@ class TrendingAdapter :
     inner class TrendingViewHolder(private val binding: ItemsTrendingBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        @SuppressLint("SetTextI18n")
         fun bind(trending: TrendingEntity) {
             binding.apply {
                 tvTitle.text = trending.original_title
@@ -44,10 +42,10 @@ class TrendingAdapter :
                     .into(imgPoster)
             }
             itemView.setOnClickListener {
-                val intentDetail = Intent(itemView.context, DetailActivity::class.java)
-                intentDetail.putExtra(Helper.EXTRA_ID, trending.trendingId)
+                val detail = Intent(itemView.context, DetailActivity::class.java)
+                detail.putExtra(Helper.EXTRA_ID, trending.trendingId)
                     .putExtra(Helper.EXTRA_KEY, Helper.EXTRA_TRENDING)
-                itemView.context.startActivity(intentDetail)
+                itemView.context.startActivity(detail)
             }
         }
     }
@@ -56,12 +54,12 @@ class TrendingAdapter :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): TrendingAdapter.TrendingViewHolder {
+    ): TrendingViewHolder {
         val mView = ItemsTrendingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TrendingViewHolder(mView)
     }
 
-    override fun onBindViewHolder(holder: TrendingAdapter.TrendingViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TrendingViewHolder, position: Int) {
         val trending = getItem(position)
         if (trending != null) {
             holder.bind(trending)

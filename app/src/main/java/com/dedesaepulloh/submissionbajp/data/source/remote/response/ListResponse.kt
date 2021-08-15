@@ -15,4 +15,5 @@ data class ListResponse<T>(
 
     @field:SerializedName("total_results")
     val totalResults: Int? = null
+
 )

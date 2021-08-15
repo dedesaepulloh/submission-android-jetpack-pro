@@ -1,4 +1,4 @@
-package com.dedesaepulloh.submissionbajp.ui.home.trending
+package com.dedesaepulloh.submissionbajp.ui.trending
 
 import android.content.Context
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dedesaepulloh.submissionbajp.BaseApplication
 import com.dedesaepulloh.submissionbajp.databinding.FragmentTrendingBinding
-import com.dedesaepulloh.submissionbajp.ui.adapter.TrendingAdapter
+import com.dedesaepulloh.submissionbajp.ui.trending.adapter.TrendingAdapter
 import com.dedesaepulloh.submissionbajp.viewmodel.ViewModelFactory
 import com.dedesaepulloh.submissionbajp.vo.Status
 import javax.inject.Inject
@@ -71,11 +71,15 @@ class TrendingFragment : Fragment() {
 
     private fun showLoading(state: Boolean) {
         if (state) {
-            binding.rvTrending.visibility = View.GONE
-            binding.progressBar.visibility = View.VISIBLE
+            binding.apply {
+                rvTrending.visibility = View.GONE
+                progressBar.visibility = View.VISIBLE
+            }
         } else {
-            binding.rvTrending.visibility = View.VISIBLE
-            binding.progressBar.visibility = View.GONE
+            binding.apply {
+                rvTrending.visibility = View.VISIBLE
+                progressBar.visibility = View.GONE
+            }
         }
     }
 }

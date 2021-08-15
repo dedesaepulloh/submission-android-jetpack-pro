@@ -1,11 +1,12 @@
-package com.dedesaepulloh.submissionbajp.ui.home.movies
+package com.dedesaepulloh.submissionbajp.ui.movies
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.dedesaepulloh.submissionbajp.data.source.local.entity.MovieEntity
+import androidx.paging.PagedList
 import com.dedesaepulloh.submissionbajp.data.source.CatalogRepository
-import com.dedesaepulloh.submissionbajp.utils.DataDummy
+import com.dedesaepulloh.submissionbajp.data.source.local.entity.MovieEntity
+import com.dedesaepulloh.submissionbajp.vo.Resource
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
@@ -29,7 +30,10 @@ class MoviesViewModelTest {
     private lateinit var catalogRepository: CatalogRepository
 
     @Mock
-    private lateinit var observer: Observer<List<MovieEntity>>
+    private lateinit var observer: Observer<Resource<PagedList<MovieEntity>>>
+
+    @Mock
+    private lateinit var moviePagedList: PagedList<MovieEntity>
 
     @Before
     fun setUp() {
@@ -38,13 +42,14 @@ class MoviesViewModelTest {
 
     @Test
     fun getMovies() {
-        val dummyMovie = DataDummy.generateDummyPopularMovies()
-        val movie = MutableLiveData<List<MovieEntity>>()
+        val dummyMovie = Resource.success(moviePagedList)
+        val movie = MutableLiveData<Resource<PagedList<MovieEntity>>>()
         movie.value = dummyMovie
 
+        `when`(dummyMovie.data?.size).thenReturn(12)
         `when`(catalogRepository.getMoviePopular()).thenReturn(movie)
 
-        val movieEntities = viewModel.getMovies().value
+        val movieEntities = viewModel.getMovies().value?.data
         verify(catalogRepository).getMoviePopular()
         assertNotNull(movieEntities)
         assertEquals(12, movieEntities?.size)

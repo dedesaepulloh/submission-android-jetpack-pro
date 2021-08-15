@@ -1,11 +1,12 @@
-package com.dedesaepulloh.submissionbajp.ui.home.trending
+package com.dedesaepulloh.submissionbajp.ui.trending
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.dedesaepulloh.submissionbajp.data.source.local.entity.MovieEntity
+import androidx.paging.PagedList
 import com.dedesaepulloh.submissionbajp.data.source.CatalogRepository
-import com.dedesaepulloh.submissionbajp.utils.DataDummy
+import com.dedesaepulloh.submissionbajp.data.source.local.entity.TrendingEntity
+import com.dedesaepulloh.submissionbajp.vo.Resource
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
@@ -29,7 +30,10 @@ class TrendingViewModelTest {
     private lateinit var catalogRepository: CatalogRepository
 
     @Mock
-    private lateinit var observer: Observer<List<MovieEntity>>
+    private lateinit var observer: Observer<Resource<PagedList<TrendingEntity>>>
+
+    @Mock
+    private lateinit var trendingPagedList: PagedList<TrendingEntity>
 
     @Before
     fun setUp() {
@@ -38,13 +42,14 @@ class TrendingViewModelTest {
 
     @Test
     fun getTrending() {
-        val dummyTrending = DataDummy.generateDummyTrending()
-        val trending = MutableLiveData<List<MovieEntity>>()
+        val dummyTrending = Resource.success(trendingPagedList)
+        val trending = MutableLiveData<Resource<PagedList<TrendingEntity>>>()
         trending.value = dummyTrending
 
+        `when`(dummyTrending.data?.size).thenReturn(12)
         `when`(catalogRepository.getTrending()).thenReturn(trending)
 
-        val trendingEntities = viewModel.getTrending().value
+        val trendingEntities = viewModel.getTrending().value?.data
         verify(catalogRepository).getTrending()
         assertNotNull(trendingEntities)
         assertEquals(12, trendingEntities?.size)

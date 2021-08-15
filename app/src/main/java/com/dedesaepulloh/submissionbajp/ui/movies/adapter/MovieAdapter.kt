@@ -1,4 +1,4 @@
-package com.dedesaepulloh.submissionbajp.ui.adapter
+package com.dedesaepulloh.submissionbajp.ui.movies.adapter
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -35,18 +35,18 @@ class MovieAdapter : PagedListAdapter<MovieEntity, MovieAdapter.MovieViewHolder>
         @SuppressLint("SetTextI18n")
         fun bind(movie: MovieEntity) {
             binding.apply {
-                tvVote.text = " " + movie.vote_average.toString()
-                Glide.with(itemView)    
+                tvVote.text = movie.vote_average.toString()
+                Glide.with(itemView)
                     .load("${Helper.BASE_IMAGE_URL}${movie.poster_path}")
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .placeholder(R.drawable.ic_image)
                     .into(imgPoster)
             }
             itemView.setOnClickListener {
-                val intentDetail = Intent(itemView.context, DetailActivity::class.java)
-                intentDetail.putExtra(Helper.EXTRA_ID, movie.movieId)
+                val detail = Intent(itemView.context, DetailActivity::class.java)
+                detail.putExtra(Helper.EXTRA_ID, movie.movieId)
                     .putExtra(Helper.EXTRA_KEY, Helper.EXTRA_MOVIE)
-                itemView.context.startActivity(intentDetail)
+                itemView.context.startActivity(detail)
             }
         }
     }

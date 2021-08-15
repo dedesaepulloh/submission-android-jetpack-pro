@@ -28,14 +28,14 @@
             android:layout_gravity="fill"
             android:contentDescription="@string/movies"
             android:foregroundGravity="fill"
-            android:scaleType="fitXY"
+            android:scaleType="center"
             tools:srcCompat="@drawable/ic_image" />
 
         <TextView
             android:id="@+id/tv_vote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#CC0c111b"
+            android:background="@color/black_transparent"
             android:elevation="10dp"
             android:gravity="center_vertical"
             android:padding="3dp"

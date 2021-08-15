@@ -1,4 +1,4 @@
-package com.dedesaepulloh.submissionbajp.ui.home.movies
+package com.dedesaepulloh.submissionbajp.ui.movies
 
 import android.content.Context
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dedesaepulloh.submissionbajp.BaseApplication
 import com.dedesaepulloh.submissionbajp.databinding.FragmentMoviesBinding
-import com.dedesaepulloh.submissionbajp.ui.adapter.MovieAdapter
+import com.dedesaepulloh.submissionbajp.ui.movies.adapter.MovieAdapter
 import com.dedesaepulloh.submissionbajp.viewmodel.ViewModelFactory
 import com.dedesaepulloh.submissionbajp.vo.Status
 import javax.inject.Inject
@@ -72,11 +72,15 @@ class MoviesFragment : Fragment() {
 
     private fun showLoading(state: Boolean) {
         if (state) {
-            binding.rvMovie.visibility = View.GONE
-            binding.progressBar.visibility = View.VISIBLE
+            binding.apply {
+                rvMovie.visibility = View.GONE
+                progressBar.visibility = View.VISIBLE
+            }
         } else {
-            binding.rvMovie.visibility = View.VISIBLE
-            binding.progressBar.visibility = View.GONE
+            binding.apply {
+                rvMovie.visibility = View.VISIBLE
+                progressBar.visibility = View.GONE
+            }
         }
     }
 

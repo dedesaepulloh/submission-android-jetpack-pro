@@ -1,151 +1,98 @@
 package com.dedesaepulloh.submissionbajp.data.source.remote
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.dedesaepulloh.submissionbajp.data.source.remote.response.ListResponse
 import com.dedesaepulloh.submissionbajp.data.source.remote.response.movie.MovieResponse
+import com.dedesaepulloh.submissionbajp.data.source.remote.response.trending.TrendingResponse
 import com.dedesaepulloh.submissionbajp.data.source.remote.response.tvshow.TvShowResponse
+import com.dedesaepulloh.submissionbajp.data.source.remote.response.vo.ApiResponse
 import com.dedesaepulloh.submissionbajp.data.source.remote.rest.ApiConfig
 import com.dedesaepulloh.submissionbajp.utils.EspressoIdlingResource
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class RemoteDataSource private constructor() {
-    companion object {
-        @Volatile
-        private var instance: RemoteDataSource? = null
+@Singleton
+class RemoteDataSource @Inject constructor() {
 
-        fun getInstance(): RemoteDataSource =
-            instance ?: synchronized(this) {
-                instance ?: RemoteDataSource().apply { instance = this }
-            }
-    }
-
-    fun getMoviePopular(callback: LoadMoviePopularCallback) {
+    fun getMoviePopular(): LiveData<ApiResponse<List<MovieResponse>>> {
         EspressoIdlingResource.increment()
+        val resultMovie = MutableLiveData<ApiResponse<List<MovieResponse>>>()
         ApiConfig.getApiService().getMoviePopular()
-            .enqueue(object : retrofit2.Callback<ListResponse<MovieResponse>> {
+            .enqueue(object : Callback<ListResponse<MovieResponse>> {
                 override fun onResponse(
                     call: Call<ListResponse<MovieResponse>>,
                     response: Response<ListResponse<MovieResponse>>
                 ) {
                     if (response.isSuccessful) {
-                        response.body()?.results?.let { callback.onAllMovieReceived(it) }
+                        resultMovie.postValue(ApiResponse.success(response.body()?.results as List<MovieResponse>))
                     }
                     EspressoIdlingResource.decrement()
                 }
 
                 override fun onFailure(call: Call<ListResponse<MovieResponse>>, t: Throwable) {
                     Log.e("Failure", "${t.message}")
-                    callback.onAllMovieReceived(emptyList())
+                    resultMovie.postValue(ApiResponse.error(t.message.toString(), mutableListOf()))
                     EspressoIdlingResource.decrement()
                 }
             })
+        return resultMovie
     }
 
-    fun getMovieDetail(movieId: Int, callback: LoadDetailMovieCallback) {
+    fun getTvShowPopular(): LiveData<ApiResponse<List<TvShowResponse>>> {
         EspressoIdlingResource.increment()
-        ApiConfig.getApiService().getDetailMovie(movieId)
-            .enqueue(object : retrofit2.Callback<MovieResponse> {
-                override fun onResponse(
-                    call: Call<MovieResponse>,
-                    response: Response<MovieResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        response.body()?.let { callback.onDetailMovieReceived(it) }
-                    }
-                    EspressoIdlingResource.decrement()
-                }
-
-                override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                    Log.e("Failure", "${t.message}")
-                    EspressoIdlingResource.decrement()
-                }
-            })
-    }
-
-    fun getTvShowPopular(callback: LoadTvShowPopularCallback) {
-        EspressoIdlingResource.increment()
+        val resultTvShow = MutableLiveData<ApiResponse<List<TvShowResponse>>>()
         ApiConfig.getApiService().getTvShowPopular()
-            .enqueue(object : retrofit2.Callback<ListResponse<TvShowResponse>> {
+            .enqueue(object : Callback<ListResponse<TvShowResponse>> {
                 override fun onResponse(
                     call: Call<ListResponse<TvShowResponse>>,
                     response: Response<ListResponse<TvShowResponse>>
                 ) {
                     if (response.isSuccessful) {
-                        response.body()?.results?.let { callback.onAllTvShowReceived(it) }
+                        resultTvShow.postValue(ApiResponse.success(response.body()?.results as List<TvShowResponse>))
                     }
                     EspressoIdlingResource.decrement()
                 }
 
                 override fun onFailure(call: Call<ListResponse<TvShowResponse>>, t: Throwable) {
                     Log.e("Failure", "${t.message}")
-                    callback.onAllTvShowReceived(emptyList())
+                    resultTvShow.postValue(ApiResponse.error(t.message.toString(), mutableListOf()))
                     EspressoIdlingResource.decrement()
                 }
             })
+        return resultTvShow
     }
 
-    fun getTvShowDetail(tvShowId: Int, callback: LoadDetailTvShowCallback) {
+    fun getTrendingMovie(): LiveData<ApiResponse<List<TrendingResponse>>> {
         EspressoIdlingResource.increment()
-        ApiConfig.getApiService().getDetailTvShow(tvShowId)
-            .enqueue(object : retrofit2.Callback<TvShowResponse> {
-                override fun onResponse(
-                    call: Call<TvShowResponse>,
-                    response: Response<TvShowResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        response.body()?.let { callback.onDetailTvShowReceived(it) }
-                    }
-                    EspressoIdlingResource.decrement()
-                }
-
-                override fun onFailure(call: Call<TvShowResponse>, t: Throwable) {
-                    Log.e("Failure", "${t.message}")
-                    EspressoIdlingResource.decrement()
-                }
-            })
-    }
-
-    fun getTrendingMovie(callback: LoadTrendingCallback) {
-        EspressoIdlingResource.increment()
+        val resultTrending = MutableLiveData<ApiResponse<List<TrendingResponse>>>()
         ApiConfig.getApiService().getMovieTrending()
-            .enqueue(object : retrofit2.Callback<ListResponse<MovieResponse>> {
+            .enqueue(object : Callback<ListResponse<TrendingResponse>> {
                 override fun onResponse(
-                    call: Call<ListResponse<MovieResponse>>,
-                    response: Response<ListResponse<MovieResponse>>
+                    call: Call<ListResponse<TrendingResponse>>,
+                    response: Response<ListResponse<TrendingResponse>>
                 ) {
                     if (response.isSuccessful) {
-                        response.body()?.results?.let { callback.onAllTrendingReceived(it) }
+                        resultTrending.postValue(ApiResponse.success(response.body()?.results as List<TrendingResponse>))
                     }
                     EspressoIdlingResource.decrement()
                 }
 
-                override fun onFailure(call: Call<ListResponse<MovieResponse>>, t: Throwable) {
+                override fun onFailure(call: Call<ListResponse<TrendingResponse>>, t: Throwable) {
                     Log.e("Failure", "${t.message}")
-                    callback.onAllTrendingReceived(emptyList())
+                    resultTrending.postValue(
+                        ApiResponse.error(
+                            t.message.toString(),
+                            mutableListOf()
+                        )
+                    )
                     EspressoIdlingResource.decrement()
                 }
             })
+        return resultTrending
     }
-
-    interface LoadMoviePopularCallback {
-        fun onAllMovieReceived(movieResponse: List<MovieResponse?>)
-    }
-
-    interface LoadDetailMovieCallback {
-        fun onDetailMovieReceived(movieResponse: MovieResponse)
-    }
-
-    interface LoadTvShowPopularCallback {
-        fun onAllTvShowReceived(tvShowResponse: List<TvShowResponse?>)
-    }
-
-    interface LoadDetailTvShowCallback {
-        fun onDetailTvShowReceived(tvShowResponse: TvShowResponse)
-    }
-
-    interface LoadTrendingCallback {
-        fun onAllTrendingReceived(movieResponse: List<MovieResponse?>)
-    }
-
 }

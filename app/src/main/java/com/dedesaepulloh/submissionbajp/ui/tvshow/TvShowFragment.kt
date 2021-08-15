@@ -1,4 +1,4 @@
-package com.dedesaepulloh.submissionbajp.ui.home.tvshow
+package com.dedesaepulloh.submissionbajp.ui.tvshow
 
 import android.content.Context
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dedesaepulloh.submissionbajp.BaseApplication
 import com.dedesaepulloh.submissionbajp.databinding.FragmentTvShowBinding
-import com.dedesaepulloh.submissionbajp.ui.adapter.TvShowAdapter
+import com.dedesaepulloh.submissionbajp.ui.tvshow.adapter.TvShowAdapter
 import com.dedesaepulloh.submissionbajp.viewmodel.ViewModelFactory
 import com.dedesaepulloh.submissionbajp.vo.Status
 import javax.inject.Inject
@@ -72,11 +72,15 @@ class TvShowFragment : Fragment() {
 
     private fun showLoading(state: Boolean) {
         if (state) {
-            binding.rvTvshow.visibility = View.GONE
-            binding.progressBar.visibility = View.VISIBLE
+            binding.apply {
+                rvTvshow.visibility = View.GONE
+                progressBar.visibility = View.VISIBLE
+            }
         } else {
-            binding.rvTvshow.visibility = View.VISIBLE
-            binding.progressBar.visibility = View.GONE
+            binding.apply {
+                rvTvshow.visibility = View.VISIBLE
+                progressBar.visibility = View.GONE
+            }
         }
     }
 }

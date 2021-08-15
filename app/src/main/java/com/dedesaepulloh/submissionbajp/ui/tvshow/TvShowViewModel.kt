@@ -1,4 +1,4 @@
-package com.dedesaepulloh.submissionbajp.ui.home.tvshow
+package com.dedesaepulloh.submissionbajp.ui.tvshow
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

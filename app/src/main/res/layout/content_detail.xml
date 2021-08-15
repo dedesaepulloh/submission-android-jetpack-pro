@@ -19,7 +19,7 @@
             android:id="@+id/ri_poster"
             android:layout_width="140dp"
             android:layout_height="200dp"
-            android:scaleType="fitXY"
+            android:contentDescription="@string/detail_movie"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,7 @@
             android:layout_marginStart="9dp"
             android:layout_marginTop="4dp"
             android:textColor="@android:color/holo_blue_light"
-            android:textSize="11sp"
+            android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/ri_poster"
             app:layout_constraintTop_toBottomOf="@+id/label_release"
             tools:ignore="SmallSp"
@@ -76,7 +76,7 @@
             android:layout_marginTop="4dp"
             android:text="@string/popularity"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textSize="13sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/ri_poster"
             app:layout_constraintTop_toBottomOf="@+id/tv_release" />
@@ -88,7 +88,7 @@
             android:layout_marginStart="9dp"
             android:layout_marginTop="4dp"
             android:textColor="@android:color/holo_blue_light"
-            android:textSize="11sp"
+            android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/ri_poster"
             app:layout_constraintTop_toBottomOf="@+id/label_popularity"
             tools:ignore="SmallSp"
@@ -102,7 +102,7 @@
             android:layout_marginTop="4dp"
             android:text="@string/rating"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textSize="13sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/ri_poster"
             app:layout_constraintTop_toBottomOf="@+id/tv_popularity" />
@@ -115,7 +115,7 @@
             android:layout_marginTop="4dp"
             android:text="@string/release_date"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textSize="13sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/ri_poster"
             app:layout_constraintTop_toBottomOf="@+id/tv_title" />
@@ -150,6 +150,23 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="150dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="@string/favorite"
+            android:focusable="true"
+            android:src="@drawable/ic_favorite_border"
+            app:backgroundTint="@color/turmeric"
+            app:layout_constraintBottom_toBottomOf="@+id/ri_poster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toEndOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/tv_rate"
+            app:layout_constraintVertical_bias="1.0"
+            app:tint="@color/white" />
 
         <ProgressBar
             android:id="@+id/progress_bar"

@@ -1,11 +1,22 @@
 <resources>
     <string name="app_name">Submission BAJP</string>
     <string name="movies">Movies</string>
-    <string name="tv_show">TV Show</string>
+    <string name="tv_show">TV Shows</string>
     <string name="find">Find your favorite movies here …</string>
     <string name="popularity">Popularity :</string>
     <string name="rating">Rating :</string>
     <string name="release_date">Release Date :</string>
     <string name="overview">Overview</string>
     <string name="trending">Trending</string>
+    <string name="favorite">Favorites</string>
+    <string name="removed_favorite">removed from your favorite</string>
+    <string name="add_favorite">add to your favorite</string>
+    <string name="detail_movie">Detail Movie</string>
+    <string name="detail_tv_show">Detail TV Show</string>
+    <string name="tab_movie">Movie</string>
+    <string name="tab_tvshow">TV Show</string>
+    <string name="first_air_date">First Air Date :</string>
+    <string name="empty_favorite">You dont have a list of favorite :(</string>
+    <string name="strip">-</string>
+    <string name="detail_trending">Detail Trending</string>
 </resources>

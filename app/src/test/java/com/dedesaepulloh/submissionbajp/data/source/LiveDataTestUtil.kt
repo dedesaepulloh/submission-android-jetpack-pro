@@ -1,4 +1,4 @@
-package com.dedesaepulloh.submissionbajp.utils
+package com.dedesaepulloh.submissionbajp.data.source
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer

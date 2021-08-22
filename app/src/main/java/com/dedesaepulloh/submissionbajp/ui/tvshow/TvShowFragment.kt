@@ -60,9 +60,11 @@ class TvShowFragment : Fragment() {
                             adapter.notifyDataSetChanged()
                             showLoading(false)
                         }
+                        showTryAgain(false)
                     }
                     Status.ERROR -> {
                         showLoading(false)
+                        showTryAgain(true)
                     }
                 }
             }
@@ -81,6 +83,22 @@ class TvShowFragment : Fragment() {
                 rvTvshow.visibility = View.VISIBLE
                 progressBar.visibility = View.GONE
             }
+        }
+    }
+
+    private fun showTryAgain(state: Boolean) {
+        if (state) {
+            binding.tvshowFailed.apply {
+                imgTryAgain.visibility = View.VISIBLE
+                failedLoad.visibility = View.VISIBLE
+            }
+            binding.rvTvshow.visibility = View.GONE
+        } else {
+            binding.tvshowFailed.apply {
+                imgTryAgain.visibility = View.GONE
+                failedLoad.visibility = View.GONE
+            }
+            binding.rvTvshow.visibility = View.VISIBLE
         }
     }
 }

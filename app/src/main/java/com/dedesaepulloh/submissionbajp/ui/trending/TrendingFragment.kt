@@ -59,9 +59,11 @@ class TrendingFragment : Fragment() {
                             adapter.notifyDataSetChanged()
                             showLoading(false)
                         }
+                        showTryAgain(false)
                     }
                     Status.ERROR -> {
                         showLoading(false)
+                        showTryAgain(true)
                     }
                 }
             }
@@ -80,6 +82,22 @@ class TrendingFragment : Fragment() {
                 rvTrending.visibility = View.VISIBLE
                 progressBar.visibility = View.GONE
             }
+        }
+    }
+
+    private fun showTryAgain(state: Boolean) {
+        if (state) {
+            binding.trendingFailed.apply {
+                imgTryAgain.visibility = View.VISIBLE
+                failedLoad.visibility = View.VISIBLE
+            }
+            binding.rvTrending.visibility = View.GONE
+        } else {
+            binding.trendingFailed.apply {
+                imgTryAgain.visibility = View.GONE
+                failedLoad.visibility = View.GONE
+            }
+            binding.rvTrending.visibility = View.VISIBLE
         }
     }
 }

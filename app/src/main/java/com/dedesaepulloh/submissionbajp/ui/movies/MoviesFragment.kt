@@ -61,9 +61,11 @@ class MoviesFragment : Fragment() {
                             Log.i("DATA : ", it.toString())
                             showLoading(false)
                         }
+                        showTryAgain(false)
                     }
                     Status.ERROR -> {
                         showLoading(false)
+                        showTryAgain(true)
                     }
                 }
             }
@@ -81,6 +83,22 @@ class MoviesFragment : Fragment() {
                 rvMovie.visibility = View.VISIBLE
                 progressBar.visibility = View.GONE
             }
+        }
+    }
+
+    private fun showTryAgain(state: Boolean) {
+        if (state) {
+            binding.movieFailed.apply {
+                imgTryAgain.visibility = View.VISIBLE
+                failedLoad.visibility = View.VISIBLE
+            }
+            binding.rvMovie.visibility = View.GONE
+        } else {
+            binding.movieFailed.apply {
+                imgTryAgain.visibility = View.GONE
+                failedLoad.visibility = View.GONE
+            }
+            binding.rvMovie.visibility = View.VISIBLE
         }
     }
 
